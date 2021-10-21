@@ -2,29 +2,34 @@ import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { 
     generationsAsync,
-    selectGenerations
+    generationsSelector,
+    selectGeneration
 } from '../features/generation/generationsSlice';
 
 export const Generations = () => {
-    const {generations} = useSelector(selectGenerations);
+    const {selectedGeneration, generations} = useSelector(generationsSelector);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(generationsAsync());
-    }, [])
+    }, [dispatch])
+
+    const handleChange = (e) => {
+        dispatch(selectGeneration(e.target.selectedIndex));
+    };
 
     return (
         <div>
-            <select>
+            <select 
+            id="pokemon-select-list"
+            value={selectedGeneration}
+            onChange={handleChange} >
+            <option value="" >veuillez choisir une generation</option>
             {  
                 generations.map(generation =>
                     (
                     <>
-                    
-                        <div>
-                                <option key={generation.name} value={generation.name}> {generation.name}</option>
-                        </div>
-                        
+                        <option key={generation.name} value={generation.name} >{generation.name}</option>
                     </>
                     ) 
                 )
