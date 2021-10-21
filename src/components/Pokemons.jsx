@@ -10,6 +10,7 @@ export function Pokemons() {
     const { pokemons } = useSelector(pokemonsSelector);
 
     useEffect(() => {
+        console.log(selectedGeneration);
             dispatch(getPokemons(selectedGeneration));
     }, [dispatch, selectedGeneration]);
 

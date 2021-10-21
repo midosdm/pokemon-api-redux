@@ -10,10 +10,10 @@ const initialState = {
 export const getPokemons = createAsyncThunk(
     'pokemons/fetchPokemons',
     async (version) => {
-        const response = await fetch('https://pokeapi.co/api/v2/generation' + version)
-        .then((data) => data.json() );
-         console.log(response.results);
-         return response.results;
+        const response = await fetch('https://pokeapi.co/api/v2/generation/' + version);
+        const data = await response.json();
+         console.log(data);
+         return data;
     }
 )
 

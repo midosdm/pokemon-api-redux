@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
     generations: [],
-    selectedGeneration:1,
+    selectedGeneration:0,
     status: 'idle',
     //error
 }
@@ -28,6 +28,7 @@ export const generationsSlice = createSlice({
     initialState,
     reducers: {
          selectGeneration: (state, action) => {
+             console.log(action.payload);
              state.selectedGeneration =action.payload;
          }
     },
@@ -44,6 +45,10 @@ export const generationsSlice = createSlice({
 });
 
 export const generationsSelector = (state) => state.generations; 
-export const selectGeneration = generationsSlice.actions;
+//both work
+export const {selectGeneration} = generationsSlice.actions;
+// export const selectGeneration = generationsSlice.actions.selectGeneration;
+//----------------------
+
 // export const {getGenerations} = generationsSlice.actions;
 export default generationsSlice.reducer;
